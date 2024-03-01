@@ -6,7 +6,7 @@
 first(File) ->
     InputList = input:listOfBinaryStrings(File),
     Fun = fun(X, Sum) ->
-             Temp = calibrationVals(X),
+             Temp = calibrationVals1(X),
              {Temp, Sum + Temp}
           end,
     {_InterMediary, Final} =
@@ -15,13 +15,13 @@ first(File) ->
 
     %% lists:map(fun(Binary) -> calibrationVals(Binary) end, InputList).
 
-calibrationVals(Bin) ->
+calibrationVals1(Bin) ->
     {ok, MP} = re:compile("(?<firstDigit>\\d).*(?<lastDigit>\\d(?!.*\\d))"),
     Res = re:run(Bin, MP, [{capture, all_names, binary}]),
-    handleRegexResult(Res, Bin).
+    handleRegexResult1(Res, Bin).
 
-handleRegexResult({match, Results}, _) ->
+handleRegexResult1({match, Results}, _) ->
     list_to_integer(unicode:characters_to_list(Results));
-handleRegexResult(nomatch, Bin) ->
+handleRegexResult1(nomatch, Bin) ->
     {match, [Digit]} = re:run(Bin, "\\d{1}", [{capture, all, binary}]),
     binary_to_integer(binary:copy(Digit, 2)).
