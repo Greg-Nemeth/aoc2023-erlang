@@ -56,9 +56,3 @@ handle_regex_result([Head | Tail]) ->
     Temp = lists:last(Tail),
     Last = maps:get(Temp, ?BIN_STR_TO_INT, Temp),
     list_to_integer(unicode:characters_to_list([First, Last])).
-
-%% handleRegexResult({match, Results}, _) ->
-%%     list_to_integer(unicode:characters_to_list(Results));
-%% handleRegexResult(nomatch, Bin) ->
-%%     {match, [Digit]} = re:run(Bin, "\\d{1}", [{capture, all, binary}]),
-%%     binary_to_integer(binary:copy(Digit, 2)).
