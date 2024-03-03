@@ -17,7 +17,7 @@ first(File) ->
 convert_to_draw(Bin) ->
     Pattern = [<<", ">>],
     Arr = binary:split(Bin, Pattern, [global, trim_all]),
-    lists:map(fun(BinDraw) -> [Amount, Color] = binary:split(BinDraw, <<" ">>),
+    lists:map(fun(BinDraw) -> [Amount, Color] = binary:split(BinDraw, <<" ">>), 
     case Color of
         "red" | "green" | "blue" -> {binary_to_integer(Amount), binary_to_atom(Color) }
     end
